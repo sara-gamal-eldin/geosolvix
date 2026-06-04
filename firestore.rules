@@ -1,0 +1,52 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticatedAdmin() {
+      // In a real app, you'd verify a Firebase Auth token here.
+      // For this custom setup, we rely on the server-side API route for reads.
+      return false; // Deny direct client reads to everyone by default
+    }
+
+    match /visitors/{visitorId} {
+      // Anyone can create a visitor log if they provide the correct schema
+      allow create: if request.resource.data.keys().hasAll(['sessionId', 'pathname', 'timestamp'])
+                    && request.resource.data.sessionId is string
+                    && request.resource.data.pathname is string;
+      
+      // No one can modify or delete logs
+      allow update, delete: if false;
+      
+      // Allow read so the client SDK can fetch for the dashboard
+      // (Secured by Next.js route in UI, but technically public to API)
+      allow read: if true;
+    }
+    
+    match /stats/global {
+      // Allow anyone to read or write (needed for initial seeding and tracking)
+      allow read, write: if true;
+    }
+
+    match /training_requests/{requestId} {
+      allow create: if request.resource.data.keys().hasAll(['courseId', 'orgName', 'status', 'createdAt']);
+      allow read: if true;
+      allow update, delete: if false;
+    }
+    match /course_reservations/{reservationId} {
+      // Anyone can reserve a seat by providing an email and course name
+      allow create: if request.resource.data.keys().hasAll(['email', 'course', 'reservedAt'])
+                    && request.resource.data.email is string
+                    && request.resource.data.course is string;
+      allow read: if true;
+      allow update, delete: if false;
+    }
+    match /courses/{courseId} {
+      // Allow read and write for the courses collection so the seed function works
+      allow read, write: if true;
+    }
+    match /settings/{settingId} {
+      allow read, write: if true;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Geosolvix",
+  "description": "Geosolvix is an agentic GIS platform providing high-performance geospatial solutions and tools to solve critical geographic problems for authorities and municipal teams all over the world.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
