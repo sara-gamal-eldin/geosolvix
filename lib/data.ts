@@ -285,177 +285,187 @@ export const trainingCourses = [
 
 export const gisBlogs = [
   {
-    id: "blog-01",
-    title:
-      "Esri ArcGIS Enterprise: Building High-Availability Distributed Topologies",
-    excerpt:
-      "Learn how to architect resilient, multi-tiered Enterprise GIS portals utilizing server federations, load-balanced datastores, and cache synchronization strategies.",
-    category: "esri",
-    categoryLabel: "Esri Tech Stack",
-    author: "Richard Vance, Enterprise GIS Architect",
-    date: "May 2026",
-    duration: "8 min read",
-    headerImage:
-      "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&q=80&w=600",
-    intro:
-      "Modern municipal, national security, and key utility applications rely on uninterrupted spatial streams. For these mission-critical sectors, a single failure in the web adapter or database host could interrupt transit routers, emergency dispatches, or field telemetry syncing. This article details the structural blueprints of high-availability (HA) Esri ArcGIS Enterprise setups designed to withstand hardware loss and high traffic spikes.",
+    id: "blog-scout-01",
+    title: "Scout: A Cloud-Native Geospatial Pipeline Powered by DuckDB, GeoParquet & PMTiles",
+    excerpt: "How Scout transforms any geospatial URL into production-ready tiles, STAC catalogs, and AI-powered analytics in under 60 seconds — without pipelines, without GIS teams.",
+    category: "scout",
+    categoryLabel: "Scout Platform",
+    author: "GIS Career Hub",
+    date: "August 2026",
+    duration: "5 min read",
+    url: "https://giscareerhub.com/blog/scout-a-cloud-native-geospatial-pipeline-powered-by-duckdb-geoparquet-pmtiles",
+    headerImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600",
+    intro: "Scout is Geosolvix's flagship platform, designed to compress weeks of geospatial engineering into a single browser session. Built on DuckDB Spatial, tippecanoe, and PMTiles v3, Scout ingests any cloud-hosted geospatial dataset and outputs a fully queryable, styled tile infrastructure — all open-standard, all CDN-distributed, all owned by you.",
     sections: [
       {
-        title: "1. The Active-Active Web GIS Blueprint",
-        text: "Federating ArcGIS Server sites with Portal for ArcGIS requires active workload routing. Deploying redundant portal hubs paired with third-party load-balancers (such as AWS ALB, Citrix ADC, or NGINX) avoids single-point-of-failure vulnerabilities. Crucially, the configuration store and portal content directory must reside on highly accessible network storage systems like Amazon EFS, Azure Files, or an enterprise-grade SAN. Web Adaptors should be deployed in pairs behind the load-balancer to handle incoming HTTPS handshakes and seamlessly direct sessions to whichever Portal node possesses the active validation key.",
+        title: "1. From URL to Tiles in 60 Seconds",
+        text: "Scout's ingestion pipeline accepts any publicly accessible geospatial URL — GeoJSON, Shapefile, GeoPackage, or GeoParquet. DuckDB Spatial handles schema detection and coordinate validation while tippecanoe generates optimised PMTiles v3 archives at the correct zoom levels. The entire pipeline runs server-side with zero configuration from the user.",
       },
       {
-        title: "2. Structuring Relational & Tile Cache Datastores",
-        text: "The ArcGIS Data Store operates in continuous primary-standby mode for standard feature services. To enable replication, configure a relational database store across dual virtual machine hosts connected by dedicated sub-millisecond network interfaces. When client updates populate the primary database, asynchronous replication continuously writes write-ahead logs (WAL) to the standby node. Should the primary node fall offline, the standby host coordinates with the ArcGIS Server site administrator to promote itself to active status. This automated failover reduces data modification gaps to less than 15 seconds.",
+        title: "2. AI SQL Explorer: Ask Claude in Plain English",
+        text: "Scout integrates Claude AI to translate natural language questions into precise DuckDB Spatial SQL. Users can ask 'Show all buildings within 500 metres of the river' and watch the query execute and render on the map in real time. Claude reads the dataset schema automatically, ensuring syntactically correct queries every time.",
       },
       {
-        title: "3. Enterprise Cache Sync and Vector Tile Performance",
-        text: "Serving millions of concurrent map and feature requests requires caching. High Availability mandates storing static cache segments (.bundle systems) on synchronized clustering environments. While static caches represent low read-overhead overhead, modern applications leverage dynamic vector tile packages (VTPK). Directing clients to fetch specialized vector segments directly from a multi-node tile cache store minimizes CPU overhead on ArcGIS Server nodes. This architectural choice frees up process threads to focus on raw analysis and heavy linear network queries.",
+        title: "3. Open Standards: PMTiles, STAC, and Live XYZ Endpoints",
+        text: "Every Scout dataset generates a PMTiles v3 archive, a STAC catalog item, and a live XYZ tile endpoint — all open standards. Tiles are published to Cloudflare R2 and served via global CDN. The XYZ endpoint works natively in QGIS, ArcGIS Pro, and any MapLibre or Mapbox GL application without additional configuration.",
       },
     ],
-    conclusion:
-      "Designing for uptime in complex spatial infrastructures is about removing single points of failure. By decoupling the presentation layer from the central geoprocessing and storage layers, organization authorities guarantee resilient, sub-second responses for field teams and the public.",
+    conclusion: "Scout removes the infrastructure gap between raw geospatial data and a published, queryable tile layer — making professional-grade GIS accessible to anyone with a dataset URL. Read the full article on GIS Career Hub.",
   },
   {
     id: "blog-02",
-    title: "Esri Utility Network: Dynamic Topology and Outage Trace Algorithms",
+    title: "DuckDB Spatial: The Engine Behind Modern Geospatial Pipelines",
     excerpt:
-      "Transitioning from legacy geometric networks into ArcMap-free service-level network layers. How rules-based topological networks protect pipeline networks.",
-    category: "esri",
-    categoryLabel: "Esri Tech Stack",
-    author: "Elena Rostov, Infrastructure Team Lead",
-    date: "April 2026",
-    duration: "7 min read",
+      "How DuckDB's vectorised execution engine and spatial extension replace heavyweight PostGIS setups — processing millions of geometries in seconds without a server.",
+    category: "cloudnative",
+    categoryLabel: "Cloud-Native GIS",
+    author: "Geosolvix Engineering",
+    date: "July 2026",
+    duration: "6 min read",
     headerImage:
-      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=600",
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600",
     intro:
-      "For generations, utilities relied on geometric networks inside legacy files. Now, Esri's Utility Network (UN) represents a new paradigm, supporting intricate modeling of assets with 3D elevations, structural attachments, and dynamic logic overlays, all managed securely via service-oriented REST endpoints.",
+      "DuckDB Spatial is reshaping how geospatial engineers think about data processing. By combining a columnar analytical engine with full OGC geometry support, it lets you run spatial SQL on GeoParquet, GeoJSON, and Shapefile inputs directly — no database server, no PostGIS installation, no infrastructure overhead. Scout is built on DuckDB Spatial at its core.",
     sections: [
       {
-        title: "1. Rules-Based Engineering Topologies",
-        text: "Unlike geometric lines that permit arbitrary connections, the Utility Network enforces strict physical boundaries. Administrators define explicit connectivity rules (e.g., 'A 4-inch ductile iron gas line can connect to a 4-inch valve, but never a 12-inch water channel'). If a utility designer seeks to combine invalid materials, the engine generates persistent validation flags or completely blocks map check-ins. This rigid topology validation ensures clean, query-ready spatial records before any linear routing analyses are run.",
+        title: "1. Columnar Execution Meets Geometry",
+        text: "Traditional row-based databases process one record at a time. DuckDB organises data in columns and processes batches using vectorised SIMD instructions. When computing ST_Area across a million polygons, DuckDB evaluates entire columns in parallel, achieving speeds 10–100x faster than single-threaded geometry engines. This makes it ideal for the tile-generation pipelines Scout runs on every dataset ingestion.",
       },
       {
-        title: "2. The Math Behind Outage Spill & Network Tracing",
-        text: "Tracing downstream or upstream flows in a complex utility mesh involves breadth-first traversals on customized system graphs. When a water lateral pipe ruptures, the trace algorithm begins at the incident pinpoint, inspects the adjacent junction vertices, and steps from line to line. The solver continues traversing outward until it intercepts isolation valves capable of choking the flow. This dynamic query, executing over thousands of assets in milliseconds, is made possible because Esri represents network topologies as aggregated indexed matrices rather than real-time spatial intersections.",
+        title: "2. GeoParquet and Zero-Copy Reads",
+        text: "DuckDB Spatial reads GeoParquet natively — including partitioned datasets hosted on Cloudflare R2 or S3 — using HTTP range requests. This means Scout can run spatial queries against remote datasets without downloading the entire file. Column pruning ensures only the geometry and required attribute columns are fetched, cutting bandwidth dramatically compared to GeoJSON or Shapefile pipelines.",
+      },
+      {
+        title: "3. Full Spatial SQL Without a Server",
+        text: "ST_Intersects, ST_Buffer, ST_Transform, ST_Area, ST_Distance — all standard spatial functions are available in DuckDB Spatial. Scout exposes these through Claude AI, letting users write natural language queries that get compiled to precise DuckDB SQL and executed in milliseconds. The entire query lifecycle runs inside the Scout API route — no external database, no connection pooling.",
       },
     ],
     conclusion:
-      "By transitioning utility structures to explicit network engines, resource providers maintain perfect integrity in their digital twins and significantly speed up disaster containment operations.",
+      "DuckDB Spatial makes professional-grade spatial analytics accessible without server infrastructure, and it is the engine that gives Scout its 60-second pipeline performance.",
   },
   {
     id: "blog-03",
-    title:
-      "Unlocking PostGIS: Powerful Spatial Joins and Nearest Neighbor (KNN) Queries",
+    title: "PMTiles v3: Serverless Vector Tile Distribution Without a Tile Server",
     excerpt:
-      "Master geographic SQL queries in PostgreSQL. Discover how ST_DWithin and index-assisted nearest neighbor (KNN) calculations outperform conventional Python loops.",
-    category: "opensource",
-    categoryLabel: "Open Source GIS",
-    author: "Mateo Silva, Core Spatial Database Engineer",
-    date: "May 2026",
-    duration: "6 min read",
+      "How a single static file on Cloudflare R2 can serve billions of map tile requests without a tile server — and why PMTiles is the backbone of Scout's publish workflow.",
+    category: "cloudnative",
+    categoryLabel: "Cloud-Native GIS",
+    author: "Geosolvix Engineering",
+    date: "June 2026",
+    duration: "5 min read",
     headerImage:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=600",
+      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&q=80&w=600",
     intro:
-      "Many data scientists attempt to execute spatial checks by fetching raw coordinates into memory and executing nested loops in Python. This practice is slow and scales poorly. The proper solution is doing geospatial queries close to the data inside PostgreSQL using the PostGIS spatial engine.",
+      "PMTiles is an open archive format that stores an entire tile pyramid inside a single file, indexed so that any individual tile can be retrieved via an HTTP range request. Scout generates a PMTiles v3 archive for every dataset it processes and publishes it to Cloudflare R2 — giving users a permanent, CDN-backed tile URL they own outright.",
     sections: [
       {
-        title: "1. The Power of Index-Assisted Spatial Joins",
-        text: "Standard databases use B-Tree indexes for numbers and text. PostGIS leverages R-Tree indexes using the GiST (Generalized Search Tree) structure. GiST wraps geometries in Minimum Bounding Boxes (MBR). When executing spatial checks, the database first searches the 2D box structure to exclude irrelevant records (the primary filter). In step two, it runs mathematically precise formulas only on the remaining candidate geometries. This dual-phase approach speeds up queries on millions of polygon features.",
+        title: "1. HTTP Range Requests: The Key Insight",
+        text: "PMTiles works because modern browsers and HTTP clients support range requests — fetching a specific byte range from a file rather than the whole thing. PMTiles encodes a spatial index at the file header. When MapLibre GL requests tile Z/X/Y, the client reads the index (a few kilobytes), computes the byte offset of that tile, and fetches only those bytes. A 500 MB PMTiles file on R2 serves global tile requests with sub-100ms latency and zero server compute.",
       },
       {
-        title: "2. Ditching ST_Distance for ST_DWithin",
-        text: "A frequent anti-pattern is executing queries like `ST_Distance(geom1, geom2) < 500`. To compute this, the database must evaluate the exact proximity of every single element in the system. Replacing this with `ST_DWithin(geom1, geom2, 500)` leverages the GiST index directly. The engine utilizes index bounding boxes to prune features further than the distance metric, instantly narrowing down the search space without executing a single slow distance calculation on excluded items.",
+        title: "2. Tippecanoe: Generating the Archive",
+        text: "Scout uses tippecanoe — Mapbox's open-source tile generation tool — to compile input geometries into a PMTiles v3 archive. Tippecanoe handles zoom-level simplification, feature dropping at low zooms, and attribute filtering automatically. The result is an optimised tile archive where each zoom level contains the appropriate level of geometric detail without redundant data.",
       },
       {
-        title: "3. KNN Queries: Finding Closest Neighbors Instantly",
-        text: "Suppose you want to locate the 5 closest water valves to a ruptured pipe node. Rather than computing distance to all valves, PostGIS uses the index distance operator `<->`. This operator traverses the GiST index tree, yielding results ranked by proximity directly. The query: `SELECT * FROM valves ORDER BY geom <-> ST_GeomFromText('POINT(x y)', 4326) LIMIT 5` completes in single-digit milliseconds, even on tables with millions of records.",
+        title: "3. Publishing to Cloudflare R2",
+        text: "Once generated, Scout pushes the PMTiles archive to Cloudflare R2 using the S3-compatible API. R2's global network serves tiles via CDN with zero egress fees — meaning Scout users pay only for storage, not for bandwidth. The published URL is permanent and shareable directly into QGIS, ArcGIS Pro, Mapbox Studio, or any MapLibre GL JS application.",
       },
     ],
     conclusion:
-      "Treating geography as a native database type transforms geographic analysis. PostGIS provides the robust, standard queries needed to power fast, high-load web maps.",
+      "PMTiles eliminates the tile server entirely, replacing it with a static file on commodity object storage. Scout makes generating and publishing PMTiles archives a single button click.",
   },
   {
     id: "blog-04",
-    title: "Lightweight Web Mapping: Custom Shaders with MapLibre GL and OSM",
+    title: "STAC: Making Geospatial Datasets Machine-Readable and Discoverable",
     excerpt:
-      "Discover how to render vector tiles natively in the browser with OpenGL, configure custom rules, and avoid expensive map subscription fees.",
-    category: "opensource",
-    categoryLabel: "Open Source GIS",
-    author: "Yuki Tanaka, Web GL/Map Developer",
-    date: "April 2026",
+      "The SpatioTemporal Asset Catalog specification and how Scout auto-generates compliant STAC catalogs for every published dataset.",
+    category: "cloudnative",
+    categoryLabel: "Cloud-Native GIS",
+    author: "Geosolvix Engineering",
+    date: "June 2026",
+    duration: "5 min read",
+    headerImage:
+      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600",
+    intro:
+      "STAC (SpatioTemporal Asset Catalog) is the open standard that makes geospatial datasets discoverable by machines and humans alike. Scout automatically generates a valid STAC catalog item for every dataset it processes — including spatial extent, temporal metadata, asset links, and tile endpoint references — ensuring full OGC compliance out of the box.",
+    sections: [
+      {
+        title: "1. What Is a STAC Item?",
+        text: "A STAC item is a GeoJSON Feature enriched with standardised metadata fields: a unique ID, a bounding box, a datetime, a collection reference, and an assets dictionary linking to the actual data files. Scout populates all required fields automatically from the ingested dataset, writing the STAC JSON alongside the PMTiles archive in Cloudflare R2.",
+      },
+      {
+        title: "2. Why STAC Matters for Government and Enterprise",
+        text: "STAC-compliant datasets are indexable by standard catalog browsers like STAC Browser, Radiant Earth, and Microsoft Planetary Computer. Government GIS departments can point their SDI infrastructure at a Scout-generated STAC endpoint and immediately index all published datasets. Scout's Portolan SDI module passes OGC Rashid validation with 0 errors — making it ready for international GIS deployments.",
+      },
+      {
+        title: "3. STAC + PMTiles + XYZ: The Scout Data Package",
+        text: "Every Scout publish produces three artefacts: a PMTiles archive for serverless tile delivery, a live XYZ endpoint for compatibility with legacy GIS clients, and a STAC item linking both. Together they form a complete, interoperable data package that any modern GIS platform can consume without additional processing.",
+      },
+    ],
+    conclusion:
+      "STAC standardises how geospatial datasets are described and shared. Scout makes STAC catalog generation automatic — zero configuration, full compliance.",
+  },
+  {
+    id: "blog-05",
+    title: "GeoAI: Natural Language Querying of Spatial Datasets with LLMs",
+    excerpt:
+      "How Scout uses Claude AI to translate plain-English questions into DuckDB Spatial SQL — and why LLMs are transforming geospatial analytics.",
+    category: "geoai",
+    categoryLabel: "GeoAI & Analytics",
+    author: "Geosolvix Engineering",
+    date: "July 2026",
+    duration: "6 min read",
+    headerImage:
+      "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&q=80&w=600",
+    intro:
+      "The SQL Explorer in Scout lets any user — regardless of SQL knowledge — ask geospatial questions in plain English and get live results on the map. Behind the scenes, Claude reads the dataset schema, constructs a valid DuckDB Spatial query, executes it, and renders the result as a new map layer. This is GeoAI in practice.",
+    sections: [
+      {
+        title: "1. Schema-Aware Query Generation",
+        text: "The first challenge with LLM-generated SQL is hallucinated column names. Scout solves this by passing the full dataset schema — column names, data types, geometry type, CRS — to Claude as context before generating any query. Claude is instructed to reference only columns that exist in the schema, producing syntactically correct, executable SQL on the first attempt in over 95% of cases.",
+      },
+      {
+        title: "2. From Natural Language to Spatial SQL",
+        text: "A user asks: 'Show all buildings within 500 metres of the main river.' Claude translates this to a DuckDB Spatial query using ST_DWithin on the geometry columns, with the correct EPSG projection for the dataset. The query executes in milliseconds on DuckDB, returns a GeoJSON FeatureCollection, and MapLibre GL renders it as a new layer — all within a single round trip.",
+      },
+      {
+        title: "3. Classification and Choropleth from AI Queries",
+        text: "Scout's AI SQL Explorer is integrated with its classification engine. After a query returns numeric attributes, users can immediately apply quantile or equal-interval breaks and pick from 10 colour ramps to generate a choropleth visualisation. The entire workflow — from natural language question to styled map layer — takes under 10 seconds.",
+      },
+    ],
+    conclusion:
+      "GeoAI removes the SQL barrier from spatial analytics, making dataset exploration accessible to domain experts, planners, and decision-makers who have the questions but not the query skills.",
+  },
+  {
+    id: "blog-06",
+    title: "Building Cloud-Native Web GIS Applications with MapLibre GL",
+    excerpt:
+      "Why MapLibre GL JS is the open-source foundation for modern web mapping — and how Scout uses it to deliver GPU-accelerated vector tile rendering.",
+    category: "webgis",
+    categoryLabel: "Web GIS",
+    author: "Geosolvix Engineering",
+    date: "May 2026",
     duration: "5 min read",
     headerImage:
       "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=600",
     intro:
-      "Modern clients demand smooth 60fps zooming and dynamic, interactive styling. MapLibre GL - the highly active, community-maintained fork of Mapbox GL JS - solves this by drawing vector tiles natively on the browser GPU with WebGL.",
+      "MapLibre GL JS is the open-source, community-maintained fork of Mapbox GL JS. It renders vector tiles natively on the GPU using WebGL, enabling smooth 60fps pan and zoom with full style control — no licensing fees, no vendor lock-in. Scout is built on MapLibre GL and exposes its full power through a no-code interface.",
     sections: [
       {
-        title: "1. Vector Tiles vs. Raster Tiles",
-        text: "Raster tiles are pre-rendered images (.png files) delivered from a server. They are static, look pixelated when zoomed, and require expensive network transfers. Vector tiles, on the other hand, contain raw coordinate records and attribute tags (.mvt format). This allows the client browser to style, color, and label the maps dynamically. When a user zooms, coordinates are projected seamlessly by the GPU, ensuring crisp typography and rendering at any scale.",
+        title: "1. WebGL Vector Tile Rendering",
+        text: "Unlike raster tile maps that deliver pre-rendered PNG images, MapLibre GL downloads raw vector tiles (.mvt format) and renders them on the client GPU. This means styles, labels, colours, and layer visibility can change instantly without a network request. Scout's choropleth engine modifies the MapLibre style spec in real time — reclassifying 10,000 features into a new colour ramp takes under 50 milliseconds.",
       },
       {
-        title: "2. OpenStreetMap (OSM) and Free Map Pipelines",
-        text: "By coupling MapLibre GL with open vector tile servers (such as those powered by OpenMapTiles, Protomaps, or custom server clusters), developers can render global topographic maps with zero licensing fees. The vector layers are styled using a declarative JSON sheet, letting you swap themes, toggle labels, or color commercial zones based on client-side interactive variables.",
+        title: "2. PMTiles Protocol Plugin",
+        text: "Scout uses the official pmtiles.js MapLibre protocol plugin, which intercepts tile requests and translates them into HTTP range requests against the PMTiles archive on Cloudflare R2. This gives MapLibre GL direct access to Scout's published tile archives without any tile server. The plugin is open-source and compatible with all MapLibre GL versions from 3.x onwards.",
+      },
+      {
+        title: "3. Basemap Switching and Layer Compositing",
+        text: "Scout's map interface supports multiple basemap providers — OpenStreetMap, Satellite, Light, and Dark — with instant switching. User data layers are composited on top using MapLibre's layer ordering API. The Feature Inspector uses MapLibre's queryRenderedFeatures method to retrieve attribute data for any clicked feature from the tile cache, without a round-trip to the server.",
       },
     ],
     conclusion:
-      "Building map systems on open frameworks gives organizations ownership over their visual identity and avoids licensing costs, ensuring maps are free to configure.",
-  },
-  {
-    id: "blog-05",
-    title: "PMTiles and FlatGeobuf: The Cloud-Native Vector Revolution",
-    excerpt:
-      "How serverless static files are replacing complex GIS servers. Serve gigabytes of geometry records directly from cost-effective public file buckets.",
-    category: "cloudnative",
-    categoryLabel: "Cloud Native Geospatial",
-    author: "Marcus Vance, Geospatial Cloud Engineer",
-    date: "May 2026",
-    duration: "6 min read",
-    headerImage:
-      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&q=80&w=600",
-    intro:
-      "Historically, web maps required active, stateful servers like GeoServer or ArcGIS Enterprise to process, compress, and stream tiles. This model is expensive and challenging to scale. PMTiles and FlatGeobuf are changing this by introducing a fully serverless, cloud-native vector distribution paradigm.",
-    sections: [
-      {
-        title: "1. The Magic of HTTP Range Requests",
-        text: "How does a browser read a specific map tile from a single 50GB file stored in an S3 bucket without downloading the entire item? PMTiles leverages HTTP Range Requests. PMTiles is a single-file archive format containing a compact tile index at its header. When a user pans or zooms, the client reads the header, determines the offset of the specific tile, and requests only those specific bytes (e.g., bytes 105432-108221). This turns static cloud storage into an ultra-fast, cheap tileserver.",
-      },
-      {
-        title: "2. FlatGeobuf: Readable Vector Streams",
-        text: "For vector feature queries, Shapefiles and GeoJSONs are bottlenecks. GeoJSON is text-based and slow to compile in-browser, while Shapefiles are binary but obsolete. FlatGeobuf introduces a binary-encoded format based on FlatBuffers. It organizes vector features inside a spatial Hilbert R-tree index within the file. Clients can query and slice exact geometries (like specific country borders) directly using HTTP Range Requests, bypassing GIS middleware entirely.",
-      },
-    ],
-    conclusion:
-      "By storing data in cloud-native formats, GIS teams cut server maintenance, eliminate downtime, and stream maps to millions of concurrent clients for pennies.",
-  },
-  {
-    id: "blog-06",
-    title:
-      "DuckDB Spatial: Running Lightning-Fast Geoprocessing in the Browser",
-    excerpt:
-      "The SQL database designed for analytical pipelines. How to run fast spatial overlays, coordinate conversions, and shape conversions in memory.",
-    category: "cloudnative",
-    categoryLabel: "Cloud Native Geospatial",
-    author: "Zoe Lin, Head of Location Intelligence",
-    date: "April 2026",
-    duration: "7 min read",
-    headerImage:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600",
-    intro:
-      "DuckDB is recognized as the 'SQLite for analytics' because of its vectorized execution engine and column-store speed. With the modern DuckDB Spatial Extension, it can execute heavy GIS analyses - including projection conversions and polygon intersections - on millions of rows right inside your browser.",
-    sections: [
-      {
-        title: "1. Vectorized Vector Geometry Engine",
-        text: "Traditional relational databases process transactions row-by-row. DuckDB organizes records in columns and processes them in blocks. When calculating spatial centers for a column of points, DuckDB leverages modern CPU instruction sets (like AVX) to perform calculations in parallel. This vectorized approach delivers speeds up to 100 times faster than conventional single-threaded row engines.",
-      },
-      {
-        title: "2. Running In-Browser GIS with WebAssembly (WASM)",
-        text: "By compiling DuckDB and its spatial extension into WebAssembly (WASM), developers can run complete GIS work hubs directly in the browser. Users can import local GeoJSONs, Excel, or CSV files, and write standard PostGIS-style SQL queries (using functions like `ST_Intersection` or `ST_Area`). The browser executes the entire analytical sequence and renders interactive map layers, entirely with client-side CPU.",
-      },
-    ],
-    conclusion:
-      "DuckDB WASM bridges the gap between client simplicity and server power, allowing developers to create highly interactive analytical GIS portals.",
+      "MapLibre GL gives Scout a world-class mapping foundation that is open, extensible, and free from vendor lock-in — the right choice for any modern web GIS application.",
   },
 ];
 

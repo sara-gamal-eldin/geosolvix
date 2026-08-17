@@ -10,30 +10,16 @@ import {
   Sparkles,
   Database,
   BookOpen,
-  CheckSquare,
   Terminal,
-  Mail,
-  GraduationCap,
-  MapPin,
   Globe,
-  FileSpreadsheet,
-  Search,
-  PenTool,
-  Monitor,
-  CheckCircle2,
 } from "lucide-react";
 import { ScrollAnimation } from "@/components/scroll-animation";
-import { UtilityStudioShowcase } from "@/components/UtilityStudioShowcase";
-import { db } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function HomePage() {
   const [showcaseSlide, setShowcaseSlide] = useState(0);
   const [showcaseIsPlaying, setShowcaseIsPlaying] = useState(true);
   const [showcaseProgress, setShowcaseProgress] = useState(0);
   const [activeHomeCategory, setActiveHomeCategory] = useState<string | null>(null);
-  const [reserveEmail, setReserveEmail] = useState("");
-  const [reserveStatus, setReserveStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   // Auto-play logic for the hidden showcase section
   useEffect(() => {
@@ -50,33 +36,6 @@ export default function HomePage() {
     return () => clearInterval(interval);
   }, [showcaseIsPlaying]);
 
-  const handleReserveSeat = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!reserveEmail.trim()) return;
-    setReserveStatus("submitting");
-    try {
-      await addDoc(collection(db, "course_reservations"), {
-        email: reserveEmail.trim(),
-        course: "GIS Fundamentals",
-        reservedAt: serverTimestamp(),
-      });
-      setReserveStatus("success");
-      setReserveEmail("");
-    } catch {
-      setReserveStatus("error");
-    }
-  };
-
-  const curriculumModules = [
-    { icon: Globe, title: "Introduction to GIS and Its Real-World Applications" },
-    { icon: MapPin, title: "Understanding Coordinate Systems and Map Projections" },
-    { icon: Layers, title: "Working with Vector and Raster Data Types" },
-    { icon: FileSpreadsheet, title: "Exploring GIS Data Sources, Formats, and Quality" },
-    { icon: Search, title: "Managing Attribute Tables and Running Spatial Queries" },
-    { icon: Activity, title: "Performing Basic Spatial Analysis: Buffer, Overlay, and Clip" },
-    { icon: PenTool, title: "Designing Clear and Effective Map Layouts" },
-    { icon: Monitor, title: "Getting Started with GIS Software Interface and Tools" },
-  ];
 
   return (
     <div id="view-home">
@@ -185,16 +144,16 @@ export default function HomePage() {
           </ScrollAnimation>
           <ScrollAnimation delay={0.2}>
             <p className="text-lg md:text-xl leading-8 text-[#aec6ff] mb-10 max-w-3xl mx-auto">
-              Solve enterprise GIS problems beautifully. Deploy intuitive GIS workflows, customized spatial softwares, and cloud-native databases powered by zero-egress BigQuery clusters.
+              We build cloud-native geospatial platforms, spatial data infrastructure, and AI-powered GIS tools — helping organisations move from raw data to actionable, published maps faster than ever before.
             </p>
           </ScrollAnimation>
           <ScrollAnimation delay={0.3} className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              id="btn-hero-trial"
-              href="/login"
+              id="btn-hero-demo"
+              href="/demo"
               className="w-full sm:w-auto px-8 py-4 rounded-md bg-[#006ff0] hover:bg-[#0057c0] text-white text-sm font-bold shadow-lg shadow-[#006ff0]/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer text-center"
             >
-              Try for free
+              Request a Demo
             </Link>
             <Link
               id="btn-hero-products"
@@ -207,59 +166,82 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== UTILITY STUDIO SHOWCASE SECTION ===== */}
+      {/* ===== SCOUT SHOWCASE SECTION ===== */}
       <section className="py-24 bg-white border-b border-gray-100 relative overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 md:px-20 text-left relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Product Info & CTA */}
+            {/* Left Column: Scout Info */}
             <div className="lg:col-span-5 space-y-6 text-[#001a43]">
-              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[#001a43] leading-tight font-[family-name:var(--font-hanken)]">
-                Utility Studio
-              </h2>
+              <div>
+                <p className="text-xs font-extrabold text-[#006ff0] uppercase tracking-widest mb-2">
+                  Cloud-Native Geospatial Platform
+                </p>
+                <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[#001a43] leading-tight font-[family-name:var(--font-hanken)]">
+                  Scout
+                </h2>
+              </div>
               <p className="text-sm text-gray-600 leading-relaxed font-normal">
-                Turn raw geodatabases into clean, compliant, fully-connected network models — without touching a single manual snap tool.
+                Turn any geospatial dataset into production-ready tiles, AI-powered analytics, and STAC catalogs — in under 60 seconds. Paste a URL. Get a map.
               </p>
               <div className="space-y-4 pt-2">
                 <div className="flex items-start gap-3">
                   <div className="mt-1 p-1 bg-blue-500/10 rounded border border-blue-500/25">
-                    <Activity className="w-4 h-4 text-[#006ff0]" />
+                    <Sparkles className="w-4 h-4 text-[#006ff0]" />
                   </div>
                   <div>
                     <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#006ff0] mb-1 font-mono">
-                      Copilot Assisted Audit
+                      AI SQL Explorer
                     </h3>
                     <p className="text-xs text-gray-500 leading-relaxed">
-                      Run complex geometric migrations with telemetry, real-time validations, and AI co-pilot recommendations automatically.
+                      Ask Claude in plain English. Scout generates and runs DuckDB Spatial queries against your dataset, rendered live on the map.
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="mt-1 p-1 bg-blue-500/10 rounded border border-blue-500/25">
-                    <Layers className="w-4 h-4 text-[#006ff0]" />
+                    <Globe className="w-4 h-4 text-[#006ff0]" />
                   </div>
                   <div>
                     <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#006ff0] mb-1 font-mono">
-                      GIS Leak QC Buffers
+                      PMTiles + STAC Output
                     </h3>
                     <p className="text-xs text-gray-500 leading-relaxed">
-                      Analyze spatial intersection buffers on utility lines natively in your cloud data lake with zero staging files.
+                      Every dataset becomes a PMTiles archive, live XYZ endpoint, and STAC catalog. Open standards you own — no vendor lock-in.
                     </p>
                   </div>
                 </div>
               </div>
               <div className="pt-4 flex flex-wrap gap-4">
-                <Link
-                  href="/demo"
+                <a
+                  href="https://scout.geosolvix.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="px-6 py-3 rounded-lg bg-[#001a43] hover:bg-[#006ff0] text-white font-bold text-xs shadow-lg shadow-blue-500/10 transition-all cursor-pointer flex items-center gap-1.5"
                 >
-                  Request a demo
+                  Try Scout Free
                   <ArrowRight className="w-4 h-4" />
+                </a>
+                <Link
+                  href="/products"
+                  className="px-6 py-3 rounded-lg border border-[#001a43]/20 text-[#001a43] hover:border-[#006ff0] hover:text-[#006ff0] font-bold text-xs transition-all cursor-pointer flex items-center gap-1.5"
+                >
+                  Learn more
                 </Link>
               </div>
             </div>
-            {/* Right Column: Simulated Terminal & GIS Engine Walkthrough */}
+            {/* Right Column: Video Tutorial */}
             <div className="lg:col-span-7">
-              <UtilityStudioShowcase />
+              <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl ring-1 ring-[#1e3a6e]/20">
+                <video
+                  className="absolute inset-0 w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                >
+                  <source src="https://pub-bb20ce11def241fda9bd57de004f9be3.r2.dev/scout-demo-video.mp4" type="video/mp4" />
+                </video>
+              </div>
             </div>
           </div>
         </div>
@@ -569,11 +551,11 @@ export default function HomePage() {
               Explore Our Capabilities & Categories
             </h2>
             <p className="text-base text-[#475467] max-w-2xl mx-auto text-center leading-relaxed">
-              Understand the four pillars of Geosolvix service systems. We provide state-of-the-art products, precise regional tools, detailed training academy courses, and structured support resources.
+              Understand the three pillars of Geosolvix service systems. We provide state-of-the-art products, precise regional tools, and structured learning resources.
             </p>
           </ScrollAnimation>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {/* Card 1: Core Products */}
             <Link
               href="/products"
@@ -595,7 +577,7 @@ export default function HomePage() {
                   </h3>
                 </div>
                 <p className="text-xs text-[#475467] leading-relaxed mb-2">
-                  Complete, production-ready enterprise platforms including Utility studio (Utility Pipeline QC checks) and GeoFuse, resolving the entire coordinate pipeline natively inside BigQuery or Snowflake.
+                  Scout — Geosolvix's cloud-native geospatial tile engine. Ingest any vector dataset, generate PMTiles and STAC catalogs, query with AI, and publish to Cloudflare R2 in under 60 seconds.
                 </p>
               </div>
               <span className="text-[#006ff0] hover:text-[#0057c0] font-bold text-xs flex items-center gap-1 mt-2">
@@ -603,49 +585,38 @@ export default function HomePage() {
               </span>
             </Link>
 
-            {/* Card 2: Geospatial Tools */}
-            <div
-              onClick={() => setActiveHomeCategory("tools")}
+            {/* Card 2: Services */}
+            <Link
+              href="/services"
               className={
                 "relative p-6 rounded-2xl border transition-all flex flex-col justify-between cursor-pointer pt-8 " +
-                (activeHomeCategory === "tools"
+                (activeHomeCategory === "services"
                   ? "bg-[#faf9ff] border-[#006ff0] shadow-md shadow-[#006ff0]/5"
-                  : "bg-white border-[#EAECF0] hover:border-gray-300")
+                  : "bg-white border-[#EAECF0] hover:border-[#006ff0] hover:shadow-md hover:shadow-[#006ff0]/5")
               }
             >
-              {/* Floating Request a Demo tab ribbon */}
-              <Link
-                href="/demo"
-                onClick={(e) => e.stopPropagation()}
-                className="absolute top-0 right-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-black text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-b-md shadow-sm transition-all z-20 flex items-center gap-1 cursor-pointer hover:shadow-md"
-              >
-                <span>Request a Demo</span>
-                <Sparkles className="w-2.5 h-2.5 text-cyan-200 animate-pulse" />
-              </Link>
               <div>
                 <div className="flex items-center gap-2 mb-3 border-b border-gray-100 pb-2">
                   <Database className="w-5 h-5 text-[#006ff0]" />
                   <h3 className="font-extrabold text-xs text-[#001a43] uppercase tracking-wider">
-                    2. Geospatial Tools
+                    2. Services
                   </h3>
                 </div>
                 <p className="text-xs text-[#475467] leading-relaxed mb-2">
-                  Specialized tools and interactive features such as Cadastral and Land parcel splits, facility directories, custom metadata registers, basemap serving engines, and zoning verification pipelines.
+                  Spatial data engineering, vector tile infrastructure, Web GIS development, GeoAI analytics, GIS unit establishment, and consulting — delivered in days, not weeks.
                 </p>
               </div>
               <span className="text-[#006ff0] hover:text-[#0057c0] font-bold text-xs flex items-center gap-1 mt-2">
-                Interactive Demo <ArrowRight className="w-3 h-3" />
+                Explore Services <ArrowRight className="w-3 h-3" />
               </span>
-            </div>
+            </Link>
 
             {/* Card 3: Learning Resources */}
-            <div
-              onClick={() => setActiveHomeCategory("resources")}
+            <Link
+              href="/resources"
               className={
                 "p-6 rounded-2xl border transition-all flex flex-col justify-between cursor-pointer " +
-                (activeHomeCategory === "resources"
-                  ? "bg-[#faf9ff] border-[#006ff0] shadow-md shadow-[#006ff0]/5"
-                  : "bg-white border-[#EAECF0] hover:border-gray-300")
+                "bg-white border-[#EAECF0] hover:border-[#006ff0] hover:shadow-md hover:shadow-[#006ff0]/5"
               }
             >
               <div>
@@ -660,44 +631,10 @@ export default function HomePage() {
                 </p>
               </div>
               <span className="text-[#006ff0] hover:text-[#0057c0] font-bold text-xs flex items-center gap-1 mt-2">
-                Interactive Demo <ArrowRight className="w-3 h-3" />
+                Explore Resources <ArrowRight className="w-3 h-3" />
               </span>
-            </div>
+            </Link>
 
-            {/* Card 4: Training Courses */}
-            <div
-              onClick={() => setActiveHomeCategory("training")}
-              className={
-                "relative p-6 rounded-2xl border transition-all flex flex-col justify-between cursor-pointer pt-8 " +
-                (activeHomeCategory === "training"
-                  ? "bg-[#faf9ff] border-[#006ff0] shadow-md shadow-[#006ff0]/5"
-                  : "bg-white border-[#EAECF0] hover:border-gray-300")
-              }
-            >
-              {/* Floating Request a Demo tab ribbon */}
-              <Link
-                href="/demo"
-                onClick={(e) => e.stopPropagation()}
-                className="absolute top-0 right-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-black text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-b-md shadow-sm transition-all z-20 flex items-center gap-1 cursor-pointer hover:shadow-md"
-              >
-                <span>Request a Demo</span>
-                <Sparkles className="w-2.5 h-2.5 text-cyan-200 animate-pulse" />
-              </Link>
-              <div>
-                <div className="flex items-center gap-2 mb-3 border-b border-gray-100 pb-2">
-                  <CheckSquare className="w-5 h-5 text-[#006ff0]" />
-                  <h3 className="font-extrabold text-xs text-[#001a43] uppercase tracking-wider">
-                    4. Training Courses
-                  </h3>
-                </div>
-                <p className="text-xs text-[#475467] leading-relaxed mb-2">
-                  Enroll regional planning teams in accredited academies. Master spatial metadata standards, utility pipeline leak risk buffer detection, and administrative land parcel splitting logic.
-                </p>
-              </div>
-              <span className="text-[#006ff0] hover:text-[#0057c0] font-bold text-xs flex items-center gap-1 mt-2">
-                Interactive Demo <ArrowRight className="w-3 h-3" />
-              </span>
-            </div>
           </div>
 
           {/* Expandable Detail Panel */}
@@ -708,56 +645,6 @@ export default function HomePage() {
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
 
-              {activeHomeCategory === "tools" && (
-                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
-                    <div>
-                      <h4 className="text-lg font-bold text-[#001a43] mb-1">
-                        Sovereign Geospatial Tools Suite
-                      </h4>
-                      <p className="text-xs text-[#475467]">
-                        Micro-modules designed for municipal, cadastral, and transit planning operations.
-                      </p>
-                    </div>
-                    <Link
-                      href="/tools"
-                      className="px-4 py-2 rounded-lg bg-[#001a43] hover:bg-[#006ff0] text-white text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 self-start"
-                    >
-                      Go to Tools Section{" "}
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="p-4 bg-white rounded-xl border border-gray-100">
-                      <h5 className="text-xs font-bold text-[#001a43] mb-1.5 uppercase">
-                        Cadastral Splits
-                      </h5>
-                      <p className="text-[11px] text-[#475467] leading-relaxed mb-3">
-                        Accurate point buffer generators for sub-parcel splits and coordinate land division checks.
-                      </p>
-                      <span className="text-[10px] text-[#006ff0] font-mono">Status: Ready to Run</span>
-                    </div>
-                    <div className="p-4 bg-white rounded-xl border border-gray-100">
-                      <h5 className="text-xs font-bold text-[#001a43] mb-1.5 uppercase">
-                        Facility Directory
-                      </h5>
-                      <p className="text-[11px] text-[#475467] leading-relaxed mb-3">
-                        Search or locate water meters, distribution centers, or valve connections by administrative filters.
-                      </p>
-                      <span className="text-[10px] text-[#006ff0] font-mono">Status: Active</span>
-                    </div>
-                    <div className="p-4 bg-white rounded-xl border border-gray-100">
-                      <h5 className="text-xs font-bold text-[#001a43] mb-1.5 uppercase">
-                        Zoning Validation
-                      </h5>
-                      <p className="text-[11px] text-[#475467] leading-relaxed mb-3">
-                        Instantly check intersection shapes with municipal safety polygons or water bodies.
-                      </p>
-                      <span className="text-[10px] text-[#006ff0] font-mono">Status: Ready with DuckDB WASM</span>
-                    </div>
-                  </div>
-                </div>
-              )}
 
               {activeHomeCategory === "resources" && (
                 <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
@@ -805,236 +692,11 @@ export default function HomePage() {
                 </div>
               )}
 
-              {activeHomeCategory === "training" && (
-                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
-                    <div>
-                      <h4 className="text-lg font-bold text-[#001a43] mb-1">
-                        Accredited Training Programs Academy
-                      </h4>
-                      <p className="text-xs text-[#475467]">
-                        Curated GIS spatial standards certification streams for municipal teams & utilities engineers.
-                      </p>
-                    </div>
-                    <Link
-                      href="/training"
-                      className="px-4 py-2 rounded-lg bg-[#001a43] hover:bg-[#006ff0] text-white text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 self-start"
-                    >
-                      Enter GIS Academy{" "}
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="p-4 bg-white rounded-xl border border-gray-100">
-                      <span className="text-[10px] font-mono text-blue-600 bg-blue-50 px-2 py-0.5 rounded">
-                        Syllabus Group: AD-GIS-01
-                      </span>
-                      <h5 className="text-sm font-bold text-[#001a43] mt-2 mb-1.5">
-                        Advanced Spatial Analytics for Urban & City Logistics
-                      </h5>
-                      <p className="text-[11px] text-[#475467] leading-relaxed">
-                        Focuses on optimizing municipal transport routing solvers, cadastral density metrics, and buffer hazard definitions.
-                      </p>
-                    </div>
-                    <div className="p-4 bg-white rounded-xl border border-gray-100">
-                      <span className="text-[10px] font-mono text-[#10b981] bg-emerald-50 px-2 py-0.5 rounded">
-                        Syllabus Group: EO-RISK-02
-                      </span>
-                      <h5 className="text-sm font-bold text-[#001a43] mt-2 mb-1.5">
-                        Earth Observation & Satellite Radar for Climate Risk
-                      </h5>
-                      <p className="text-[11px] text-[#475467] leading-relaxed">
-                        Leverage SAR radar imagery datasets to model ocean flooding curves, calculate landslide hazard offsets, and configure early buffers.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
           </ScrollAnimation>
         </div>
       </section>
 
-      {/* ===== FEATURED COURSE: GIS FUNDAMENTALS ===== */}
-      <section className="py-24 bg-[#001a43] relative overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 pointer-events-none select-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#006ff0]/8 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[#3b82f6]/6 rounded-full blur-[100px]" />
-        </div>
-
-        <div className="max-w-[1280px] mx-auto px-4 md:px-20 relative z-10">
-          <ScrollAnimation delay={0.1} className="text-center mb-16">
-            {/* Featured Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-              <span className="text-xs font-extrabold text-amber-300 uppercase tracking-widest font-mono">
-                Featured Course
-              </span>
-              <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-            </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white mt-2 mb-4 font-[family-name:var(--font-hanken)]">
-              GIS Fundamentals
-            </h2>
-            <p className="text-base text-[#aec6ff] max-w-2xl mx-auto leading-relaxed">
-              Master the core foundations of Geographic Information Systems. From coordinate systems to spatial analysis — build the skills that every GIS professional needs.
-            </p>
-          </ScrollAnimation>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            {/* Left: Curriculum Grid */}
-            <ScrollAnimation delay={0.2} className="lg:col-span-7">
-              <div className="bg-[#0b1329]/80 border border-[#1e2d53] rounded-2xl p-6 md:p-8 backdrop-blur-sm">
-                <div className="flex items-center gap-2 mb-6 pb-4 border-b border-[#1e2d53]/80">
-                  <GraduationCap className="w-5 h-5 text-[#006ff0]" />
-                  <h3 className="text-sm font-extrabold text-white uppercase tracking-wider font-mono">
-                    Course Curriculum — 8 Modules
-                  </h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {curriculumModules.map((mod, i) => {
-                    const Icon = mod.icon;
-                    return (
-                      <div
-                        key={i}
-                        className="group flex items-start gap-3 p-3.5 rounded-xl bg-[#040810]/60 border border-[#1e2d53]/50 hover:border-[#006ff0]/40 hover:bg-[#0c1c3f]/50 transition-all duration-200"
-                      >
-                        <div className="mt-0.5 p-1.5 bg-[#006ff0]/10 rounded-lg border border-[#006ff0]/20 shrink-0 group-hover:bg-[#006ff0]/20 transition-colors">
-                          <Icon className="w-3.5 h-3.5 text-[#006ff0]" />
-                        </div>
-                        <div>
-                          <span className="text-[10px] font-mono text-[#006ff0]/70 uppercase tracking-wider">
-                            Module {String(i + 1).padStart(2, "0")}
-                          </span>
-                          <p className="text-xs text-gray-200 leading-relaxed mt-0.5 font-medium">
-                            {mod.title}
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Course Stats */}
-                <div className="flex flex-wrap gap-4 mt-6 pt-4 border-t border-[#1e2d53]/60">
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                    <span className="text-[10px] font-mono text-gray-400">8 Modules</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-[#006ff0]" />
-                    <span className="text-[10px] font-mono text-gray-400">Beginner Friendly</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-amber-500" />
-                    <span className="text-[10px] font-mono text-gray-400">Certificate Included</span>
-                  </div>
-                </div>
-              </div>
-            </ScrollAnimation>
-
-            {/* Right: Reservation Card */}
-            <ScrollAnimation delay={0.3} className="lg:col-span-5">
-              <div className="bg-gradient-to-br from-[#0c1c3f] to-[#040810] border border-[#1e2d53] rounded-2xl p-6 md:p-8 sticky top-24">
-                {/* Course highlight */}
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="p-1.5 bg-amber-500/10 rounded-lg border border-amber-500/20">
-                    <GraduationCap className="w-5 h-5 text-amber-400" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-white">GIS Fundamentals</h4>
-                    <span className="text-[10px] font-mono text-amber-400 uppercase tracking-wider">
-                      Featured • Enrolling Now
-                    </span>
-                  </div>
-                </div>
-
-                <p className="text-xs text-gray-400 leading-relaxed mb-6">
-                  Be among the first to enroll. Leave your email below and we&apos;ll reserve your seat and notify you when enrollment officially opens.
-                </p>
-
-                {/* Email Form */}
-                {reserveStatus === "success" ? (
-                  <div className="flex flex-col items-center gap-3 py-6 text-center animate-in fade-in slide-in-from-bottom-2 duration-300">
-                    <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-                      <CheckCircle2 className="w-6 h-6 text-emerald-400" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-white">Seat Reserved!</p>
-                      <p className="text-xs text-gray-400 mt-1">
-                        We&apos;ll reach out when enrollment opens.
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => setReserveStatus("idle")}
-                      className="text-[10px] font-mono text-[#006ff0] hover:text-[#aec6ff] transition-colors cursor-pointer mt-2"
-                    >
-                      Reserve another seat →
-                    </button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleReserveSeat} className="space-y-3">
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                      <input
-                        id="input-reserve-email"
-                        type="email"
-                        required
-                        placeholder="your.email@company.com"
-                        value={reserveEmail}
-                        onChange={(e) => {
-                          setReserveEmail(e.target.value);
-                          if (reserveStatus === "error") setReserveStatus("idle");
-                        }}
-                        className="w-full pl-10 pr-4 py-3 bg-[#03060c] border border-[#1e2d53] rounded-xl text-xs text-white placeholder:text-gray-500 focus:outline-none focus:border-[#006ff0] focus:ring-1 focus:ring-[#006ff0]/30 transition-all font-mono"
-                      />
-                    </div>
-                    <button
-                      id="btn-reserve-seat"
-                      type="submit"
-                      disabled={reserveStatus === "submitting"}
-                      className="w-full py-3 rounded-xl bg-[#006ff0] hover:bg-[#0057c0] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-sm shadow-lg shadow-[#006ff0]/20 hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer flex items-center justify-center gap-2"
-                    >
-                      {reserveStatus === "submitting" ? (
-                        <>
-                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          Reserving...
-                        </>
-                      ) : (
-                        <>
-                          <Mail className="w-4 h-4" />
-                          Reserve My Seat
-                        </>
-                      )}
-                    </button>
-                    {reserveStatus === "error" && (
-                      <p className="text-[10px] text-red-400 text-center font-mono animate-in fade-in duration-200">
-                        Something went wrong. Please try again.
-                      </p>
-                    )}
-                  </form>
-                )}
-
-                {/* Trust signals */}
-                <div className="mt-6 pt-4 border-t border-[#1e2d53]/60 space-y-2">
-                  <div className="flex items-center gap-2 text-[10px] text-gray-500">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-500/70 shrink-0" />
-                    <span>No payment required — just reserve</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-[10px] text-gray-500">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-500/70 shrink-0" />
-                    <span>Early access pricing for first 50 seats</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-[10px] text-gray-500">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-500/70 shrink-0" />
-                    <span>Unsubscribe anytime — we respect your inbox</span>
-                  </div>
-                </div>
-              </div>
-            </ScrollAnimation>
-          </div>
-        </div>
-      </section>
 
       {/* ===== HIDDEN GIS WORKFLOWS SECTION ===== */}
       <section className="hidden">
