@@ -1,8 +1,8 @@
 "use client";
 
 import { ScrollAnimation } from "@/components/scroll-animation";
-import { Sparkles, DatabaseZap, ArrowRight, Clock, Shield, Eye, Sliders, Cpu, Activity, Database, RefreshCw } from "lucide-react";
-import { UtilityStudioShowcase } from "@/components/UtilityStudioShowcase";
+import { Sparkles, ArrowRight, Zap, Box, Palette, Cloud, Globe, Search, CheckCircle2, Play } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function ProductsPage() {
@@ -11,201 +11,201 @@ export default function ProductsPage() {
   return (
     <div className="py-20 bg-white min-h-screen">
       <div className="max-w-[1280px] mx-auto px-4 md:px-20">
+
+        {/* ── Header ── */}
         <ScrollAnimation delay={0.1} className="text-center mb-16">
           <span className="text-xs font-extrabold text-[#006ff0] uppercase tracking-widest bg-blue-50 px-3.5 py-1.5 rounded-full">
-            Primary Enterprise Software
+            Cloud-Native Geospatial Platform
           </span>
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight font-[family-name:var(--font-hanken)] text-[#001a43] mt-5 mb-4">
-            Utility studio
+            Scout
           </h1>
           <p className="text-base text-[#475467] max-w-2xl mx-auto font-sans">
-            Enterprise-grade high-precision GIS data cleansing, schema transformation, and topological validation. Turn raw utility datasets into compliant, connected database models instantly.
+            Turn any geospatial dataset into production-ready vector tiles, PMTiles, and STAC catalogs — powered by DuckDB Spatial and Claude AI. Open standards, no vendor lock-in.
           </p>
         </ScrollAnimation>
 
+        {/* ── Main card: info + video ── */}
         <div className="relative bg-[#faf9ff] p-8 md:p-12 rounded-3xl border border-[#EAECF0] hover:shadow-xl transition-all mb-16 overflow-hidden pt-14">
           <div
-            onClick={(e) => {
-              e.stopPropagation();
-              router.push("/demo");
-            }}
+            onClick={(e) => { e.stopPropagation(); router.push("/demo"); }}
             className="absolute top-0 right-8 bg-gradient-to-r from-[#006ff0] to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-black text-xs uppercase tracking-wider px-4 py-2 rounded-b-lg shadow-md transition-all z-20 flex items-center gap-1.5 cursor-pointer"
           >
-            <span>Request Product Demo</span>
+            <span>Request Scout Demo</span>
             <Sparkles className="w-3.5 h-3.5 text-cyan-200 animate-pulse" />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+            {/* Left: text */}
             <div className="lg:col-span-5 flex flex-col justify-center text-left">
               <div className="flex items-center gap-2.5 mb-5 select-none">
                 <span className="p-2 bg-blue-500/10 text-blue-600 rounded-lg">
-                  <DatabaseZap className="w-5 h-5 animate-pulse" />
+                  <Zap className="w-5 h-5 animate-pulse" />
                 </span>
                 <span className="px-2.5 py-1 text-xs font-bold bg-blue-50 text-blue-700 rounded-md">
-                  Utility Network Model Migration
+                  Geospatial Tile Engine
                 </span>
               </div>
-              <h2 className="text-2xl md:text-3.5xl font-extrabold text-[#001a43] tracking-tight mb-4 flex-wrap">
-                Utility Studio: Production-Ready Utility Networks, Automatically.
+              <h2 className="text-2xl md:text-3xl font-extrabold text-[#001a43] tracking-tight mb-4">
+                Scout: From Raw Data to Production Tiles in 60 Seconds.
               </h2>
               <p className="text-sm text-[#475467] leading-relaxed mb-6">
-                An elite, customized GIS suite built specifically to automate the complex migration of raw utility assets into standard-compliant, topology-safe Utility Network models. Avoid months of manual snapping and custom Python dangles. Utility Studio is a profile-driven, 100% air-gapped certified engine that lets you cleanse, build, and audit your networks deterministically.
+                Scout ingests any vector dataset — GeoJSON, Shapefile, GeoPackage, GeoParquet — and runs the full pipeline automatically: DuckDB Spatial processing, tippecanoe tile generation, STAC catalog creation, and one-click publish to Cloudflare R2. Add Claude-powered AI SQL on top, and you have the fastest path from raw data to a published, queryable geospatial layer.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/scout"
+                  className="px-6 py-3.5 rounded-xl bg-[#001a43] text-white font-bold text-xs hover:bg-[#0057c0] transition-all shadow-md inline-flex items-center justify-center gap-2 w-fit"
+                >
+                  Try Scout Free <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
                 <button
                   onClick={() => router.push("/demo")}
-                  className="px-6 py-3.5 rounded-xl bg-[#001a43] text-white font-bold text-xs hover:bg-[#0057c0] transition-all text-center cursor-pointer shadow-md inline-flex items-center justify-center gap-2 w-fit"
+                  className="px-6 py-3.5 rounded-xl border border-[#006ff0] text-[#006ff0] font-bold text-xs hover:bg-blue-50 transition-all inline-flex items-center justify-center gap-2 w-fit cursor-pointer"
                 >
-                  Request Utility studio Trial <ArrowRight className="w-3.5 h-3.5" />
+                  Request a Demo
                 </button>
               </div>
             </div>
+
+            {/* Right: video */}
             <div className="lg:col-span-7 w-full">
-              <UtilityStudioShowcase />
+              <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl ring-1 ring-[#1e3a6e]/20">
+                <video
+                  className="absolute inset-0 w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                >
+                  <source src="https://pub-bb20ce11def241fda9bd57de004f9be3.r2.dev/scout-demo-video.mp4" type="video/mp4" />
+                </video>
+              </div>
             </div>
           </div>
         </div>
 
+        {/* ── Feature cards ── */}
         <div className="mt-8">
           <div className="text-center mb-10">
             <h3 className="text-xl md:text-2xl font-extrabold text-[#001a43] tracking-tight">
-              The Ultimate Migration Paradigm Shift: Core Value Propositions
+              Everything You Need. Nothing You Don&apos;t.
             </h3>
             <p className="text-xs text-[#475467] max-w-lg mx-auto mt-2">
-              How Utility studio compares to the traditional, fragile geoprocessing approach.
+              Eight core capabilities that replace an entire stack of disconnected GIS tools.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Feature 1 */}
+
             <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4">
-                  <Clock className="w-5 h-5" />
+                  <Zap className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-[#001a43] text-sm mb-2">⏱️ Days vs. Months</h4>
+                <h4 className="font-bold text-[#001a43] text-sm mb-2">⚡ 60-Second Pipeline</h4>
                 <p className="text-[11px] text-[#475467] leading-relaxed">
-                  A portable desktop engine that automates complex topology runs. Compress months of GIS loops into repeatable, high-speed hours.
+                  Paste any dataset URL and get production-ready tiles automatically. DuckDB Spatial + tippecanoe handle everything — no config, no installs.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">
-                The Modern Way
-              </div>
+              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">Zero-Setup</div>
             </div>
 
-            {/* Feature 2 */}
             <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4">
-                  <Shield className="w-5 h-5" />
+                  <Sparkles className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-[#001a43] text-sm mb-2">🔒 100% Air-Gapped</h4>
+                <h4 className="font-bold text-[#001a43] text-sm mb-2">🤖 AI SQL Explorer</h4>
                 <p className="text-[11px] text-[#475467] leading-relaxed">
-                  No external port exposure or cloud uploads. Offline certified to safeguard sensitive state grids and defense utility infrastructure.
+                  Ask Claude in plain English. Scout generates and runs DuckDB Spatial queries on your data, rendering results on the map instantly.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">
-                Secure & Sovereign
-              </div>
+              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">Claude-Powered</div>
             </div>
 
-            {/* Feature 3 */}
             <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4">
-                  <Eye className="w-5 h-5" />
+                  <Box className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-[#001a43] text-sm mb-2">🛡️ Full Auditability</h4>
+                <h4 className="font-bold text-[#001a43] text-sm mb-2">📦 PMTiles + STAC</h4>
                 <p className="text-[11px] text-[#475467] leading-relaxed">
-                  No silent geometric changes. Isolates auto-generated splits and custom Tees into transparent, review-first layers for human verification.
+                  Every dataset becomes a PMTiles archive, live XYZ endpoint, and full STAC catalog. Open standards you own — no vendor lock-in.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">
-                Sovereign Control
-              </div>
+              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">Open Standards</div>
             </div>
 
-            {/* Feature 4 */}
             <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4">
-                  <Sliders className="w-5 h-5" />
+                  <Palette className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-[#001a43] text-sm mb-2">📋 Profile-Driven</h4>
+                <h4 className="font-bold text-[#001a43] text-sm mb-2">🎨 Choropleth Styling</h4>
                 <p className="text-[11px] text-[#475467] leading-relaxed">
-                  The software bends to your database naming patterns and custom topological attributes. Your historical schema remains intact.
+                  Visual classification with 10 color ramps. Quantile, equal interval, and categorical — all point-and-click, no code required.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">
-                Customer-Centric Adapt
-              </div>
+              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">No-Code Visual</div>
             </div>
 
-            {/* Feature 5 */}
             <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4">
-                  <Cpu className="w-5 h-5" />
+                  <Cloud className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-[#001a43] text-sm mb-2">🤖 100% Local-First AI</h4>
+                <h4 className="font-bold text-[#001a43] text-sm mb-2">☁️ One-Click Publish</h4>
                 <p className="text-[11px] text-[#475467] leading-relaxed">
-                  AI pipeline advice runs directly on client hardware. Absolute safety and data privacy with zero external telemetry.
+                  Publish tiles permanently to Cloudflare R2 in one click. Get a CDN-backed PMTiles URL you own and can share anywhere.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">
-                Privacy Preserved
-              </div>
+              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">Instant CDN</div>
             </div>
 
-            {/* Feature 6 */}
             <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4">
-                  <Activity className="w-5 h-5" />
+                  <Globe className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-[#001a43] text-sm mb-2">🏗️ Modular Scale</h4>
+                <h4 className="font-bold text-[#001a43] text-sm mb-2">🔗 Live XYZ Endpoints</h4>
                 <p className="text-[11px] text-[#475467] leading-relaxed">
-                  Engineered with a high-performance spatial query core to process millions of pipe coordinates without freezing or memory leaks.
+                  Every layer gets a live tile endpoint, compatible with QGIS, ArcGIS, Mapbox, and any MapLibre-based client out of the box.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">
-                Decoupled Architecture
-              </div>
+              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">Universal Compatibility</div>
             </div>
 
-            {/* Feature 7 */}
             <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4">
-                  <Database className="w-5 h-5" />
+                  <Search className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-[#001a43] text-sm mb-2">🚀 Zero-Touch DB setup</h4>
+                <h4 className="font-bold text-[#001a43] text-sm mb-2">🔍 Feature Inspector</h4>
                 <p className="text-[11px] text-[#475467] leading-relaxed">
-                  1-click execution instantiates, provisions, and indexes an embedded spatial database locally without heavy DBA overhead.
+                  Click any feature on the map to instantly inspect all its attributes, geometry type, and property values in a clean side panel.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">
-                Instant Deploy
-              </div>
+              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">Interactive</div>
             </div>
 
-            {/* Feature 8 */}
             <div className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4">
-                  <RefreshCw className="w-5 h-5" />
+                  <CheckCircle2 className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-[#001a43] text-sm mb-2">🔁 100% Idempotancy</h4>
+                <h4 className="font-bold text-[#001a43] text-sm mb-2">✅ Portolan SDI</h4>
                 <p className="text-[11px] text-[#475467] leading-relaxed">
-                  Run, abort, edit parameters, and retry a million times. The database output remains deterministic, duplicate-free, and clean.
+                  Fully OGC-compliant. Passes Rashid with 0 errors. Ready for government, enterprise, and international GIS deployments.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">
-                Execution Safety
-              </div>
+              <div className="mt-4 pt-3 border-t border-gray-50 text-[10px] font-semibold text-emerald-600">Certified</div>
             </div>
+
           </div>
         </div>
+
       </div>
     </div>
   );

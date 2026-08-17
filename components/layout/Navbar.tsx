@@ -47,23 +47,20 @@ export default function Navbar() {
             <Link href="/products" id="btn-nav-products" className={getLinkClass("/products")}>
               Products
             </Link>
-            <Link href="/tools" id="btn-nav-tools" className={getLinkClass("/tools")}>
-              Tools
+            <Link href="/services" id="btn-nav-services" className={getLinkClass("/services")}>
+              Services
             </Link>
             <Link href="/resources" id="btn-nav-resources" className={getLinkClass("/resources")}>
               Resources
             </Link>
-            <Link href="/training" id="btn-nav-training" className={getLinkClass("/training")}>
-              Training Courses
-            </Link>
           </div>
           <div className="flex items-center gap-3.5 border-l border-[#004397] pl-8">
             <Link
-              href="/login"
-              id="btn-nav-login"
+              href="/scout"
+              id="btn-nav-scout"
               className="text-[#aec6ff] hover:text-white transition-colors text-sm font-semibold hover:underline"
             >
-              Log in
+              Try Scout Free
             </Link>
             <Link
               href="/demo"
@@ -90,25 +87,22 @@ export default function Navbar() {
           <Link href="/products" id="mob-btn-products" onClick={() => setIsMobileMenuOpen(false)} className={getMobileLinkClass("/products")}>
             Products
           </Link>
-          <Link href="/tools" id="mob-btn-tools" onClick={() => setIsMobileMenuOpen(false)} className={getMobileLinkClass("/tools")}>
-            Tools
+          <Link href="/services" id="mob-btn-services" onClick={() => setIsMobileMenuOpen(false)} className={getMobileLinkClass("/services")}>
+            Services
           </Link>
           <Link href="/resources" id="mob-btn-resources" onClick={() => setIsMobileMenuOpen(false)} className={getMobileLinkClass("/resources")}>
             Resources
-          </Link>
-          <Link href="/training" id="mob-btn-training" onClick={() => setIsMobileMenuOpen(false)} className={getMobileLinkClass("/training")}>
-            Training Courses
           </Link>
 
           <hr className="border-[#00275a] my-1" />
           <div className="flex flex-col gap-3 pt-2">
             <Link
-              href="/login"
-              id="mob-btn-login"
+              href="/scout"
+              id="mob-btn-scout"
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-[#aec6ff] hover:text-white transition-colors text-lg font-semibold text-left py-1"
             >
-              Log in
+              Try Scout Free
             </Link>
             <Link
               href="/demo"
