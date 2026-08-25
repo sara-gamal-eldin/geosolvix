@@ -55,13 +55,13 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="flex items-center gap-3.5 border-l border-[#004397] pl-8">
-            <Link
-              href="/scout"
+            <a
+              href="https://scout.geosolvix.com"
               id="btn-nav-scout"
               className="text-[#aec6ff] hover:text-white transition-colors text-sm font-semibold hover:underline"
             >
               Try Scout Free
-            </Link>
+            </a>
             <Link
               href="/demo"
               id="btn-nav-demo"
@@ -96,14 +96,14 @@ export default function Navbar() {
 
           <hr className="border-[#00275a] my-1" />
           <div className="flex flex-col gap-3 pt-2">
-            <Link
-              href="/scout"
+            <a
+              href="https://scout.geosolvix.com"
               id="mob-btn-scout"
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-[#aec6ff] hover:text-white transition-colors text-lg font-semibold text-left py-1"
             >
               Try Scout Free
-            </Link>
+            </a>
             <Link
               href="/demo"
               id="mob-btn-demo"

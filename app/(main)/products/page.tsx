@@ -54,12 +54,12 @@ export default function ProductsPage() {
                 Scout ingests any vector dataset — GeoJSON, Shapefile, GeoPackage, GeoParquet — and runs the full pipeline automatically: DuckDB Spatial processing, tippecanoe tile generation, STAC catalog creation, and one-click publish to Cloudflare R2. Add Claude-powered AI SQL on top, and you have the fastest path from raw data to a published, queryable geospatial layer.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="/scout"
+                <a
+                  href="https://scout.geosolvix.com"
                   className="px-6 py-3.5 rounded-xl bg-[#001a43] text-white font-bold text-xs hover:bg-[#0057c0] transition-all shadow-md inline-flex items-center justify-center gap-2 w-fit"
                 >
                   Try Scout Free <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                </a>
                 <button
                   onClick={() => router.push("/demo")}
                   className="px-6 py-3.5 rounded-xl border border-[#006ff0] text-[#006ff0] font-bold text-xs hover:bg-blue-50 transition-all inline-flex items-center justify-center gap-2 w-fit cursor-pointer"

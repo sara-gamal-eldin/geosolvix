@@ -213,7 +213,7 @@ export default function HomePage() {
               </div>
               <div className="pt-4 flex flex-wrap gap-4">
                 <a
-                  href="https://www.geosolvix.com/scout"
+                  href="https://scout.geosolvix.com"
                   className="px-6 py-3 rounded-lg bg-[#001a43] hover:bg-[#006ff0] text-white font-bold text-xs shadow-lg shadow-blue-500/10 transition-all cursor-pointer flex items-center gap-1.5"
                 >
                   Try Scout Free
