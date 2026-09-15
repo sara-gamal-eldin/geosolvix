@@ -18,7 +18,7 @@ def _safe_urlopen(req, timeout=30):
     parsed = urllib.parse.urlparse(url)
     if parsed.scheme not in ('http', 'https'):
         raise ValueError(f'Blocked URL scheme {parsed.scheme!r} — only http and https are allowed.')
-    return urllib.request.urlopen(req, timeout=timeout)  # noqa: S310
+    return urllib.request.urlopen(req, timeout=timeout)  # nosec B310
 
 
 class ScoutError(Exception):

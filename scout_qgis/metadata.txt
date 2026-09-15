@@ -3,7 +3,7 @@ name=Scout - AI Geospatial Catalog
 qgisMinimumVersion=3.16
 qgisMaximumVersion=4.99
 description=Browse, query, and load datasets from a Scout catalog. Ask plain-English questions about your geospatial data and load results directly into QGIS.
-version=0.1.1
+version=0.1.2
 author=Geosolvix
 email=info@geosolvix.com
 about=Scout turns your STAC catalog into an AI-powered geospatial workspace. Connect to any Scout instance, browse datasets, load them as WFS or XYZ tile layers, and run natural-language queries that return GeoPackage layers directly on your map. Supports Free, Solo, Professional, Team, and Enterprise plans.
@@ -13,6 +13,7 @@ repository=https://github.com/sara-gamal-eldin/geosolvix
 homepage=https://scout.geosolvix.com
 
 changelog=
+    0.1.2 - Fix Bandit B310 suppression in URL validator.
     0.1.1 - Security hardening: URL scheme validation, code quality fixes.
     0.1.0 - Initial release: catalog browser, WFS/XYZ/GPKG layer loading, AI query with GPKG/GeoParquet/Tiles export, plan and usage display.
 
