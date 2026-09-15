@@ -5,7 +5,7 @@ qgisMaximumVersion=4.99
 description=Browse, query, and load datasets from a Scout catalog. Ask plain-English questions about your geospatial data and load results directly into QGIS.
 version=0.1.0
 author=Geosolvix
-email=hello@geosolvix.com
+email=info@geosolvix.com
 about=Scout turns your STAC catalog into an AI-powered geospatial workspace. Connect to any Scout instance, browse datasets, load them as WFS or XYZ tile layers, and run natural-language queries that return GeoPackage layers directly on your map. Supports Free, Solo, Professional, Team, and Enterprise plans.
 
 tracker=https://github.com/sara-gamal-eldin/geosolvix/issues
