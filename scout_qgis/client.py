@@ -12,6 +12,15 @@ import urllib.parse
 from typing import Optional, List, Any, Callable
 
 
+def _safe_urlopen(req, timeout=30):
+    """Wrapper around urlopen that validates the URL scheme is http or https."""
+    url = req.full_url if hasattr(req, 'full_url') else req
+    parsed = urllib.parse.urlparse(url)
+    if parsed.scheme not in ('http', 'https'):
+        raise ValueError(f'Blocked URL scheme {parsed.scheme!r} — only http and https are allowed.')
+    return urllib.request.urlopen(req, timeout=timeout)  # noqa: S310
+
+
 class ScoutError(Exception):
     """Raised for HTTP errors from the Scout API."""
     def __init__(self, status: int, message: str):
@@ -42,7 +51,7 @@ class ScoutClient:
         url = f'{self.base_url}{path}'
         req = urllib.request.Request(url, headers=self._headers())
         try:
-            with urllib.request.urlopen(req, timeout=30) as resp:
+            with _safe_urlopen(req, timeout=30) as resp:
                 return json.loads(resp.read().decode())
         except urllib.error.HTTPError as e:
             body = e.read().decode(errors='replace')
@@ -57,7 +66,7 @@ class ScoutClient:
         data = json.dumps(body).encode()
         req = urllib.request.Request(url, data=data, headers=self._headers(), method='POST')
         try:
-            with urllib.request.urlopen(req, timeout=60) as resp:
+            with _safe_urlopen(req, timeout=60) as resp:
                 return json.loads(resp.read().decode())
         except urllib.error.HTTPError as e:
             body = e.read().decode(errors='replace')
@@ -72,7 +81,7 @@ class ScoutClient:
         data = json.dumps(body).encode()
         req = urllib.request.Request(url, data=data, headers=self._headers(), method='POST')
         try:
-            with urllib.request.urlopen(req, timeout=120) as resp:
+            with _safe_urlopen(req, timeout=120) as resp:
                 return resp.read()
         except urllib.error.HTTPError as e:
             body = e.read().decode(errors='replace')
@@ -86,7 +95,7 @@ class ScoutClient:
         url = f'{self.base_url}{path}'
         req = urllib.request.Request(url, headers=self._headers())
         try:
-            with urllib.request.urlopen(req, timeout=120) as resp:
+            with _safe_urlopen(req, timeout=120) as resp:
                 return resp.read()
         except urllib.error.HTTPError as e:
             raise ScoutError(e.code, e.reason)
@@ -154,7 +163,7 @@ class ScoutClient:
 
         req = urllib.request.Request(put_url, data=data, headers=h, method='PUT')
         try:
-            with urllib.request.urlopen(req, timeout=600):
+            with _safe_urlopen(req, timeout=600):
                 pass
         except urllib.error.HTTPError as e:
             raise ScoutError(e.code, f'R2 upload failed: {e.reason}')
@@ -187,7 +196,7 @@ class ScoutClient:
         current_event: Optional[str] = None
 
         try:
-            with urllib.request.urlopen(req, timeout=600) as resp:
+            with _safe_urlopen(req, timeout=600) as resp:
                 while True:
                     raw = resp.readline()
                     if not raw:

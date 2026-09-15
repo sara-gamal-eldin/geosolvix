@@ -8,7 +8,7 @@ _NS = 'scout_plugin'
 
 DEFAULTS = {
     'base_url': 'https://scout.geosolvix.com',
-    'token':    '',
+    'token':    '',  # nosec B105 — empty default, not a hardcoded credential
 }
 
 

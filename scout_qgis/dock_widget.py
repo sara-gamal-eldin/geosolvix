@@ -78,13 +78,13 @@ PLAN_LIMITS = {
 # ── Widget helpers ────────────────────────────────────────────────────────────
 
 def _lbl(text: str, bold: bool = False, color: str = '') -> QLabel:
-    l = QLabel(text)
-    l.setWordWrap(True)
+    lbl = QLabel(text)
+    lbl.setWordWrap(True)
     if bold:
-        f = l.font(); f.setBold(True); l.setFont(f)
+        f = lbl.font(); f.setBold(True); lbl.setFont(f)
     if color:
-        l.setStyleSheet(f'color:{color};')
-    return l
+        lbl.setStyleSheet(f'color:{color};')
+    return lbl
 
 
 def _btn(text: str, primary: bool = False) -> QPushButton:
@@ -125,10 +125,10 @@ def _field(placeholder: str, password: bool = False) -> QLineEdit:
 
 
 def _section_label(text: str) -> QLabel:
-    l = QLabel(text)
-    f = l.font(); f.setBold(True); f.setPointSize(10); l.setFont(f)
-    l.setStyleSheet('color:#9ca3af;letter-spacing:0.08em;font-size:10px;padding:2px 0;')
-    return l
+    lbl = QLabel(text)
+    f = lbl.font(); f.setBold(True); f.setPointSize(10); lbl.setFont(f)
+    lbl.setStyleSheet('color:#9ca3af;letter-spacing:0.08em;font-size:10px;padding:2px 0;')
+    return lbl
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -901,7 +901,9 @@ class ScoutDockWidget(QDockWidget):
         client = self._client()
 
         def do_work():
-            on_prog = lambda msg: progress_cb[0] and progress_cb[0](msg)
+            def on_prog(msg):
+                if progress_cb[0]:
+                    progress_cb[0](msg)
 
             # Step 1: export layer to temp GeoPackage
             on_prog('Exporting layer to GeoPackage…')
@@ -926,7 +928,7 @@ class ScoutDockWidget(QDockWidget):
             finally:
                 try:
                     os.unlink(tmp_path)
-                except Exception:
+                except Exception:  # nosec B110 — best-effort temp file cleanup
                     pass
 
         w = Worker(do_work)
@@ -1005,7 +1007,7 @@ class ScoutDockWidget(QDockWidget):
         self._connect_btn.setEnabled(True)
         self._connect_btn.setVisible(True)
         self._cat_progress.setVisible(False)
-        links = [l for l in catalog.get('links', []) if l.get('rel') in ('item', 'child')]
+        links = [lnk for lnk in catalog.get('links', []) if lnk.get('rel') in ('item', 'child')]
 
         self._set_connected(True)
         count = len(links)
